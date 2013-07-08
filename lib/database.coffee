@@ -19,7 +19,7 @@ parseConnection = (connectionString) ->
 module.exports.open = (connectionString, callback) ->
     cnx = parseConnection connectionString
     server = new mongodb.Server cnx.host, cnx.port, serverOptions
-    dbManager = new mongodb.Db cnx.database, server
+    dbManager = new mongodb.Db cnx.database, server, {safe:true}
     dbManager.open (err, client) ->
         if err then callback('Could not connect to the database')
         if cnx.username
